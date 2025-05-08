@@ -7,7 +7,6 @@ module AcmeWidget
       @app = application
       @ui = application.ui
       @basket_controller = application.basket_controller
-      @example_runner = application.example_runner
     end
 
     def run

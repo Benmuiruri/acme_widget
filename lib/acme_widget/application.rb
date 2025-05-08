@@ -3,7 +3,7 @@
 module AcmeWidget
   # Initialises application components connecting user interface, business logic and data
   class Application
-    attr_reader :basket_controller, :example_runner, :ui
+    attr_reader :basket_controller, :ui
 
     def initialize(ui = UI::ConsoleUI.new)
       @ui = ui

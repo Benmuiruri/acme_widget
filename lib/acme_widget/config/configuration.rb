@@ -4,8 +4,9 @@ require 'yaml'
 
 module AcmeWidget
   module Config
-    # Loads the offers config and can also load delivery rules
+    # Loads the offers config and can also load delivery rules yaml
     class Configuration
+      # TODO: fail gracefully by checking for malformed offers
       def self.load_file(filename)
         file_path = File.join(File.dirname(__FILE__), filename)
         begin
@@ -24,7 +25,7 @@ module AcmeWidget
       end
 
       def self.delivery_rules
-        # This can also be a YAML
+        # TODO: move this to YAML file
         @delivery_rules ||= {
           'rules' => [
             { 'threshold' => 90, 'charge' => 0 },

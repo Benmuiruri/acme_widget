@@ -5,7 +5,7 @@
 require_relative 'acme_widget/models/product'
 require_relative 'acme_widget/models/catalog'
 require_relative 'acme_widget/models/delivery_rule'
-require_relative 'acme_widget/basket'
+require_relative 'acme_widget/models/basket'
 
 require_relative 'acme_widget/services/delivery_calculator'
 require_relative 'acme_widget/services/offer_calculator'
