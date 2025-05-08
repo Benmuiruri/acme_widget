@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../../lib/acme_widget/models/product'
-require_relative '../../lib/acme_widget/models/catalog'
-require_relative '../../lib/acme_widget/models/delivery_rule'
-require_relative '../../lib/acme_widget/services/delivery_calculator'
-require_relative '../../lib/acme_widget/basket'
+require_relative '../../../lib/acme_widget/models/product'
+require_relative '../../../lib/acme_widget/models/catalog'
+require_relative '../../../lib/acme_widget/models/delivery_rule'
+require_relative '../../../lib/acme_widget/services/delivery_calculator'
+require_relative '../../../lib/acme_widget/models/basket'
 
 RSpec.describe AcmeWidget::Basket do
   let(:red_widget) { AcmeWidget::Product.new('R01', 32.95) }
@@ -110,7 +110,7 @@ RSpec.describe AcmeWidget::Basket do
       discount = red_widget.price / 2.0
       delivery = 4.95
 
-      expected_total = (subtotal - discount + delivery).round(2)
+      expected_total = ((subtotal - discount + delivery) * 100).floor / 100.0
       expect(basket_with_offers.total).to eq(expected_total)
     end
   end

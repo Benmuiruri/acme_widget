@@ -2,30 +2,5 @@
 # frozen_string_literal: true
 
 require_relative '../lib/acme_widget'
-
-catalog = AcmeWidget::Catalog.new([
-                                    AcmeWidget::Product.new('R01', 32.95),
-                                    AcmeWidget::Product.new('G01', 24.95),
-                                    AcmeWidget::Product.new('B01', 7.95)
-                                  ])
-
-delivery_rules = [
-  AcmeWidget::DeliveryRule.new(threshold: 90, charge: 0),
-  AcmeWidget::DeliveryRule.new(threshold: 50, charge: 2.95),
-  AcmeWidget::DeliveryRule.new(threshold: 0, charge: 4.95)
-]
-
-delivery_calculator = AcmeWidget::DeliveryCalculator.new(delivery_rules)
-
-basket = AcmeWidget::Basket.new(
-  catalog: catalog,
-  delivery_calculator: delivery_calculator
-)
-
-basket.add('R01')
-basket.add('G01')
-
-puts "Items in basket: #{basket.items.map(&:code).join(', ')}"
-puts "Subtotal: $#{format('%.2f', basket.subtotal)}"
-puts "Delivery: $#{format('%.2f', basket.delivery_charge)}"
-puts "Total: $#{format('%.2f', basket.total)}"
+# This is the executable entry point for the Acme Widget POS system
+AcmeWidget.start

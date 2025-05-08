@@ -3,6 +3,7 @@
 require_relative '../offers/promotional_offer'
 
 module AcmeWidget
+  # Promotional offer that applies a 50% discount to every second item of a specific product
   class BuyOneGetSecondHalfPrice
     include PromotionalOffer
 

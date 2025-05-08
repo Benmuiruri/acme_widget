@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AcmeWidget
+  # Model representing delivery rule
   class DeliveryRule
     attr_reader :threshold, :charge
 

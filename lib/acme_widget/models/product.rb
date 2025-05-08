@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AcmeWidget
+  # Model representing a product
   class Product
     attr_reader :code, :price
 

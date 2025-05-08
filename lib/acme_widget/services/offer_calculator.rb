@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AcmeWidget
+  # Applies all applicable offers to a collection of items and sums the discounts.
   class OfferCalculator
     def initialize(offers = [])
       @offers = offers

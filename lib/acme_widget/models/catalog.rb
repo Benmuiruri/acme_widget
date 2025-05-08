@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AcmeWidget
+  # Model representing product catalog
   class Catalog
     def initialize(products = [])
       @products = products

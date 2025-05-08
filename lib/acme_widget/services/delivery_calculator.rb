@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AcmeWidget
+  # Calculates delivery charges based on order amount using threshold-based rules
   class DeliveryCalculator
     def initialize(rules)
       @rules = rules.sort_by(&:threshold).reverse

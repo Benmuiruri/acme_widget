@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module AcmeWidget
+  # Model representing customer's shopping basket manages product items
+  # calculates pricing including subtotals, promotional discounts, and delivery charges.
   class Basket
     attr_reader :items
 
@@ -34,11 +36,22 @@ module AcmeWidget
     end
 
     def total
-      (subtotal - discount + delivery_charge).round(2)
+      ((subtotal - discount + delivery_charge) * 100).floor / 100.0
     end
 
     def clear
       @items = []
+    end
+
+    def breakdown
+      {
+        items: @items.map(&:code),
+        subtotal: subtotal,
+        discount: discount,
+        subtotal_after_offers: subtotal - discount,
+        delivery_charge: delivery_charge,
+        total: total
+      }
     end
   end
 end

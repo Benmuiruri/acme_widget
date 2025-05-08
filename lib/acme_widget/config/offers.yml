@@ -1,0 +1,6 @@
+offers:
+  mappings:
+    buy_one_get_second_half_price: BuyOneGetSecondHalfPrice
+  active:
+    - type: buy_one_get_second_half_price
+      product_code: R01
