@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AcmeWidget
   class DeliveryCalculator
     def initialize(rules)

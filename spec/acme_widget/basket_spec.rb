@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require_relative '../../lib/acme_widget/models/product'
 require_relative '../../lib/acme_widget/models/catalog'
@@ -62,11 +64,54 @@ RSpec.describe AcmeWidget::Basket do
     end
   end
 
+  describe '#discount' do
+    it 'returns zero when no offer calculator is provided' do
+      basket_without_offers = AcmeWidget::Basket.new(
+        catalog: catalog,
+        delivery_calculator: delivery_calculator
+      )
+      basket_without_offers.add('R01')
+      expect(basket_without_offers.discount).to eq(0)
+    end
+
+    it 'calculates discount when offer calculator is provided' do
+      offer = AcmeWidget::BuyOneGetSecondHalfPrice.new('R01', catalog)
+      offer_calculator = AcmeWidget::OfferCalculator.new([offer])
+
+      basket_with_offers = AcmeWidget::Basket.new(
+        catalog: catalog,
+        delivery_calculator: delivery_calculator,
+        offer_calculator: offer_calculator
+      )
+
+      basket_with_offers.add('R01')
+      basket_with_offers.add('R01')
+
+      expected_discount = red_widget.price / 2.0
+      expect(basket_with_offers.discount).to eq(expected_discount)
+    end
+  end
+
   describe '#total' do
-    it 'includes the delivery charge in the total' do
-      basket.add('B01')
-      basket.add('G01')
-      expect(basket.total).to eq(37.85)
+    it 'includes discounts and delivery in the total' do
+      offer = AcmeWidget::BuyOneGetSecondHalfPrice.new('R01', catalog)
+      offer_calculator = AcmeWidget::OfferCalculator.new([offer])
+
+      basket_with_offers = AcmeWidget::Basket.new(
+        catalog: catalog,
+        delivery_calculator: delivery_calculator,
+        offer_calculator: offer_calculator
+      )
+
+      basket_with_offers.add('R01')
+      basket_with_offers.add('R01')
+
+      subtotal = red_widget.price * 2
+      discount = red_widget.price / 2.0
+      delivery = 4.95
+
+      expected_total = (subtotal - discount + delivery).round(2)
+      expect(basket_with_offers.total).to eq(expected_total)
     end
   end
 
