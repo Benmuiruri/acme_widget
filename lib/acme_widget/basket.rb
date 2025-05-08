@@ -4,8 +4,9 @@ module AcmeWidget
   class Basket
     attr_reader :items
 
-    def initialize(catalog:)
+    def initialize(catalog:, delivery_calculator:)
       @catalog = catalog
+      @delivery_calculator = delivery_calculator
       @items = []
     end
 
@@ -21,8 +22,12 @@ module AcmeWidget
       @items.sum(&:price)
     end
 
+    def delivery_charge
+      @delivery_calculator.calculate(subtotal)
+    end
+
     def total
-      subtotal
+      (subtotal + delivery_charge).round(2)
     end
 
     def clear
