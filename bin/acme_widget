@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../lib/acme_widget'
+
+catalog = AcmeWidget::Catalog.new([
+                                    AcmeWidget::Product.new('R01', 32.95),
+                                    AcmeWidget::Product.new('G01', 24.95),
+                                    AcmeWidget::Product.new('B01', 7.95)
+                                  ])
+
+basket = AcmeWidget::Basket.new(catalog: catalog)
+basket.add('R01')
+basket.add('G01')
+
+puts "Items in basket: #{basket.items.map(&:code).join(', ')}"
+puts "Subtotal: $#{format('%.2f', basket.subtotal)}"
+puts "Total: $#{format('%.2f', basket.total)}"
