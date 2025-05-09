@@ -1,6 +1,6 @@
 # Acme Widget Co Sales System
 
-This is a Ruby CLI tool for the Acme Widget Co sales system. It calculates the total cost of a basket of items, taking into account delivery charges and special offers.
+This is a Ruby CLI tool for the Acme Widget Co sales system. It displayed the list of items, calculates the total cost of a basket of items, taking into account delivery charges based on discount offers.
 
 ## Features
 
