@@ -37,8 +37,8 @@ module AcmeWidget
         display_formatted('Available Products:')
         display_separator('-')
 
-        products.each do |code, name, price|
-          display_message("#{code} - #{name}: #{format_currency(price)}")
+        products.each do |product|
+          display_message("#{product.code} - #{product.code.sub(/\d+/, '')} Widget: #{format_currency(product.price)}")
         end
 
         display_separator('-')

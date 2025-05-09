@@ -18,6 +18,7 @@ module AcmeWidget
         when 'a' then add_product_to_basket
         when 'v' then @basket_controller.view_basket
         when 'c' then @basket_controller.clear_basket
+        when 'p' then @ui.display_products(@app.catalog.all)
         when 'q' then break
         else
           @ui.display_message('Invalid option, please try again.')
@@ -35,6 +36,7 @@ module AcmeWidget
         'a' => 'Add product to basket',
         'v' => 'View basket details',
         'c' => 'Clear basket',
+        'p' => 'View product catalog',
         'q' => 'Quit'
       }
       @ui.display_menu(menu_options)
