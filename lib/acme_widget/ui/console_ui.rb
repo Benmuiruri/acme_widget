@@ -38,7 +38,7 @@ module AcmeWidget
         display_separator('-')
 
         products.each do |code, name, price|
-          display_message("#{code} - #{name}: #{price}")
+          display_message("#{code} - #{name}: #{format_currency(price)}")
         end
 
         display_separator('-')
@@ -49,21 +49,27 @@ module AcmeWidget
 
         items_by_code.each do |code, items|
           product = items.first
-          display_message("#{code} x#{items.size} - $#{format('%.2f', product.price)} each")
+          display_message("#{code} x#{items.size} - #{format_currency(product.price)} each")
         end
 
         display_formatted('=== Price Breakdown ===')
-        display_message("Subtotal: $#{format('%.2f', breakdown[:subtotal])}")
+        display_message("Subtotal: #{format_currency(breakdown[:subtotal])}")
 
         if breakdown[:discount].positive?
-          display_message("Discount:-$#{format('%.2f', breakdown[:discount])}")
-          display_message("Subtotal after offers: $#{format('%.2f', breakdown[:subtotal_after_offers])}")
+          display_message("Discount:-#{format_currency(breakdown[:discount])}")
+          display_message("Subtotal after offers: #{format_currency(breakdown[:subtotal_after_offers])}")
         end
 
-        display_message("Delivery charge: $#{format('%.2f', breakdown[:delivery_charge])}")
+        display_message("Delivery charge: #{format_currency(breakdown[:delivery_charge])}")
         display_message('-------------------')
-        display_message("TOTAL: $#{format('%.2f', breakdown[:total])}")
+        display_message("TOTAL: #{format_currency(breakdown[:total])}")
         display_message('====================')
+      end
+
+      private
+
+      def format_currency(amount)
+        "$#{format('%.2f', amount)}"
       end
     end
   end
