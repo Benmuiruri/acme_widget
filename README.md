@@ -17,7 +17,7 @@ This is a Ruby CLI tool for the Acme Widget Co sales system. It calculates the t
 ## How to Run
 
 # Interactive CLI Mode
-`./bin/acme_widget`
+Run this command from the root folder - `./bin/acme_widget`
 
 This will start the interactive CLI application where you can add products to your basket, view the basket contents, and clear the basket.
 
