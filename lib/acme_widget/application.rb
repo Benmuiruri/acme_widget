@@ -5,14 +5,15 @@ module AcmeWidget
   class Application
     attr_reader :basket_controller, :ui, :catalog
 
-    def initialize(ui = UI::ConsoleUI.new)
+    def initialize(ui = UI::ConsoleUI.new, interface = CLI)
       @ui = ui
+      @interface = interface
       setup_components
     end
 
     def run
       display_welcome
-      CLI.new(self).run
+      cli.run
     end
 
     def display_welcome
@@ -21,6 +22,10 @@ module AcmeWidget
     end
 
     private
+
+    def cli
+      @cli ||= @interface.new(self)
+    end
 
     def setup_components
       @catalog = Config::ApplicationSetup.create_catalog
