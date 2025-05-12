@@ -28,3 +28,7 @@ This will start the interactive CLI application where you can add products to yo
 ## Assumptions
 - Delivery charges are calculated based on the basket total after discounts.
 - The "buy one, get second half price" offer applies to multiples of two items (e.g., with 3 items, the discount applies to 1 item)
+- OfferFactory assumes all offer classes:
+  - Are within the AcmeWidget namespace
+  - Have a constructor that accepts `product_code` and `catalog` parameters
+- Delivery rules and product catalog are defined in code for now... but could be loaded from configuration files
