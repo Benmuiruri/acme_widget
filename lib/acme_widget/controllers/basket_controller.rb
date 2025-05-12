@@ -22,13 +22,12 @@ module AcmeWidget
       end
 
       def view_basket
-        if @basket.items.empty?
+        if @basket.empty?
           @ui.display_message("\nBasket is empty.")
           return
         end
 
-        items_by_code = @basket.items.group_by(&:code)
-        @ui.display_basket_summary(items_by_code, @basket.breakdown)
+        @ui.display_basket_summary(@basket.grouped_items, @basket.breakdown)
       end
 
       def clear_basket

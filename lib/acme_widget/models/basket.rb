@@ -43,6 +43,14 @@ module AcmeWidget
       @items = []
     end
 
+    def empty?
+      @items.empty?
+    end
+
+    def grouped_items
+      @items.group_by(&:code)
+    end
+
     def breakdown
       {
         items: @items.map(&:code),
