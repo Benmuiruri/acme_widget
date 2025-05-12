@@ -16,8 +16,8 @@ module AcmeWidget
         OfferCalculatorFactory.build(catalog)
       end
 
-      def self.create_basket(catalog, delivery_calc, offer_calc)
-        Basket.new(
+      def self.create_basket(catalog, delivery_calc, offer_calc, basket = Basket)
+        basket.new(
           catalog: catalog,
           delivery_calculator: delivery_calc,
           offer_calculator: offer_calc
