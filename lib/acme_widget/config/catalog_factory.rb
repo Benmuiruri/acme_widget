@@ -7,9 +7,9 @@ module AcmeWidget
       def self.build
         # Products could be loaded from an external source (e.g. YAML)
         products = [
-          Product.new('R01', 32.95),
-          Product.new('G01', 24.95),
-          Product.new('B01', 7.95)
+          Product.new(code: 'R01', price: 32.95),
+          Product.new(code: 'G01', price: 24.95),
+          Product.new(code: 'B01', price: 7.95)
         ]
         Catalog.new(products)
       end

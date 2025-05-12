@@ -6,7 +6,11 @@ module AcmeWidget
     class OfferCalculatorFactory
       def self.build(catalog, conf = Configuration)
         offers = conf.offers['active'].map do |config|
-          OfferFactory.create(config['type'].to_sym, config['product_code'], catalog)
+          OfferFactory.create(
+            type: config['type'].to_sym,
+            product_code: config['product_code'],
+            catalog: catalog
+          )
         end
         OfferCalculator.new(offers)
       end

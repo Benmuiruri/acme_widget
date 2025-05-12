@@ -5,7 +5,7 @@ module AcmeWidget
     # Controller that manages interactions between the user interface and basket model.
     # Handles adding products, viewing basket contents, and clearing the basket
     class BasketController
-      def initialize(basket, ui)
+      def initialize(basket:, ui:)
         @basket = basket
         @ui = ui
       end

@@ -6,9 +6,9 @@ require_relative '../../../lib/acme_widget/models/catalog'
 require_relative '../../../lib/acme_widget/offers/buy_one_get_second_half_price'
 
 RSpec.describe AcmeWidget::BuyOneGetSecondHalfPrice do
-  let(:red_widget) { AcmeWidget::Product.new('R01', 32.95) }
+  let(:red_widget) { AcmeWidget::Product.new(code: 'R01', price: 32.95) }
   let(:catalog) { AcmeWidget::Catalog.new([red_widget]) }
-  let(:offer) { AcmeWidget::BuyOneGetSecondHalfPrice.new('R01', catalog) }
+  let(:offer) { AcmeWidget::BuyOneGetSecondHalfPrice.new(product_code: 'R01', catalog: catalog) }
 
   describe '#applicable?' do
     it 'returns true when there are two or more of the product' do

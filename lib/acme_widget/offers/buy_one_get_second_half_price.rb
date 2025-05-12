@@ -7,7 +7,7 @@ module AcmeWidget
   class BuyOneGetSecondHalfPrice
     include PromotionalOffer
 
-    def initialize(product_code, catalog)
+    def initialize(product_code:, catalog:)
       @product_code = product_code
       @catalog = catalog
     end

@@ -5,8 +5,8 @@ require_relative '../../../lib/acme_widget/models/product'
 require_relative '../../../lib/acme_widget/models/catalog'
 
 RSpec.describe AcmeWidget::Catalog do
-  let(:red_widget) { AcmeWidget::Product.new('R01', 32.95) }
-  let(:green_widget) { AcmeWidget::Product.new('G01', 24.95) }
+  let(:red_widget) { AcmeWidget::Product.new(code: 'R01', price: 32.95) }
+  let(:green_widget) { AcmeWidget::Product.new(code: 'G01', price: 24.95) }
   let(:catalog) { AcmeWidget::Catalog.new([red_widget, green_widget]) }
 
   describe '#find_by_code' do

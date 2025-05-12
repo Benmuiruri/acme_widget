@@ -5,7 +5,7 @@ module AcmeWidget
   class Application
     attr_reader :basket_controller, :ui, :catalog
 
-    def initialize(ui = UI::ConsoleUI.new, interface = CLI, controller = Controllers::BasketController)
+    def initialize(ui: UI::ConsoleUI.new, interface: CLI, controller: Controllers::BasketController)
       @ui = ui
       @interface = interface
       @controller = controller

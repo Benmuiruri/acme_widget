@@ -8,9 +8,9 @@ require_relative '../../../lib/acme_widget/services/delivery_calculator'
 require_relative '../../../lib/acme_widget/models/basket'
 
 RSpec.describe AcmeWidget::Basket do
-  let(:red_widget) { AcmeWidget::Product.new('R01', 32.95) }
-  let(:green_widget) { AcmeWidget::Product.new('G01', 24.95) }
-  let(:blue_widget) { AcmeWidget::Product.new('B01', 7.95) }
+  let(:red_widget) { AcmeWidget::Product.new(code: 'R01', price: 32.95) }
+  let(:green_widget) { AcmeWidget::Product.new(code: 'G01', price: 24.95) }
+  let(:blue_widget) { AcmeWidget::Product.new(code: 'B01', price: 7.95) }
   let(:catalog) { AcmeWidget::Catalog.new([red_widget, green_widget, blue_widget]) }
 
   let(:delivery_rules) do
@@ -75,7 +75,7 @@ RSpec.describe AcmeWidget::Basket do
     end
 
     it 'calculates discount when offer calculator is provided' do
-      offer = AcmeWidget::BuyOneGetSecondHalfPrice.new('R01', catalog)
+      offer = AcmeWidget::BuyOneGetSecondHalfPrice.new(product_code: 'R01', catalog: catalog)
       offer_calculator = AcmeWidget::OfferCalculator.new([offer])
 
       basket_with_offers = AcmeWidget::Basket.new(
@@ -94,7 +94,7 @@ RSpec.describe AcmeWidget::Basket do
 
   describe '#total' do
     it 'includes discounts and delivery in the total' do
-      offer = AcmeWidget::BuyOneGetSecondHalfPrice.new('R01', catalog)
+      offer = AcmeWidget::BuyOneGetSecondHalfPrice.new(product_code: 'R01', catalog: catalog)
       offer_calculator = AcmeWidget::OfferCalculator.new([offer])
 
       basket_with_offers = AcmeWidget::Basket.new(
