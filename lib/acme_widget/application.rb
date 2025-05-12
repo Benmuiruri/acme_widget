@@ -25,7 +25,7 @@ module AcmeWidget
     private
 
     def cli
-      @cli ||= @interface.new(self)
+      @cli ||= @interface.new(@ui, @basket_controller, @catalog)
     end
 
     def setup_components

@@ -3,10 +3,10 @@
 module AcmeWidget
   # Displays CLI menu and captures user input.
   class CLI
-    def initialize(application)
-      @app = application
-      @ui = application.ui
-      @basket_controller = application.basket_controller
+    def initialize(ui, basket_controller, catalog)
+      @basket_controller = basket_controller
+      @catalog = catalog
+      @ui = ui
     end
 
     def run
@@ -18,7 +18,7 @@ module AcmeWidget
         when 'a' then add_product_to_basket
         when 'v' then @basket_controller.view_basket
         when 'c' then @basket_controller.clear_basket
-        when 'p' then @ui.display_products(@app.catalog.all)
+        when 'p' then @ui.display_products(@catalog.all)
         when 'q' then break
         else
           @ui.display_message('Invalid option, please try again.')
