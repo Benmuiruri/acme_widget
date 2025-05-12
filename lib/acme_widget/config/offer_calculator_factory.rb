@@ -13,6 +13,8 @@ module AcmeWidget
           )
         end
         OfferCalculator.new(offers)
+      rescue ConfigError
+        raise
       end
     end
   end

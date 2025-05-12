@@ -20,6 +20,7 @@ require_relative 'acme_widget/config/catalog_factory'
 require_relative 'acme_widget/config/delivery_calculator_factory'
 require_relative 'acme_widget/config/offer_calculator_factory'
 require_relative 'acme_widget/config/configuration'
+require_relative 'acme_widget/config/config_validator'
 require_relative 'acme_widget/config/offer_factory'
 require_relative 'acme_widget/application'
 require_relative 'acme_widget/cli'
@@ -28,5 +29,9 @@ require_relative 'acme_widget/cli'
 module AcmeWidget
   def self.start
     Application.new.run
+  rescue Config::ConfigError => e
+    puts "The application cannot start due to a configuration issue: #{e.message}"
+    puts "\nPlease check your config.yml file and try again."
+    exit(1)
   end
 end

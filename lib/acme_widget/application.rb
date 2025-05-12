@@ -37,7 +37,7 @@ module AcmeWidget
         @catalog, delivery_calculator, offer_calculator
       )
 
-      @basket_controller = @controller.new(basket, @ui)
+      @basket_controller = @controller.new(basket: basket, ui: @ui)
     end
   end
 end

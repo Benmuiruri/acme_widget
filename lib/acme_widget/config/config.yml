@@ -4,3 +4,11 @@ offers:
   active:
     - type: buy_one_get_second_half_price
       product_code: R01
+delivery_rules:
+  rules:
+    - threshold: 90
+      charge: 0
+    - threshold: 50
+      charge: 2.95
+    - threshold: 0
+      charge: 4.95
