@@ -17,15 +17,15 @@ module AcmeWidget
       cli.run
     end
 
-    def display_welcome
-      @ui.display_welcome
-      @ui.display_products(@catalog.all)
-    end
-
     private
 
     def cli
       @cli ||= @interface.new(@ui, @basket_controller, @catalog)
+    end
+
+    def display_welcome
+      @ui.display_welcome
+      @ui.display_products(@catalog.all)
     end
 
     def setup_components

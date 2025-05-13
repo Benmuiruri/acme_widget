@@ -8,8 +8,14 @@ module AcmeWidget
     end
 
     def calculate(amount)
-      applicable_rule = @rules.find { |rule| amount >= rule.threshold }
-      applicable_rule ? applicable_rule.charge : @rules.last.charge
+      applicable_rule = find_applicable_rule(amount)
+      applicable_rule.charge
+    end
+
+    private
+
+    def find_applicable_rule(amount)
+      @rules.find { |rule| amount >= rule.threshold } || @rules.last
     end
   end
 end

@@ -13,19 +13,29 @@ module AcmeWidget
     end
 
     def apply(items)
-      matching_items = items.select { |item| item.code == @product_code }
-      pairs = matching_items.length / 2
-
+      pairs = count_pairs(matching_items(items))
       return 0 if pairs.zero?
-
-      product = @catalog.find_by_code(@product_code)
-      discount_per_pair = product.price / 2.0
 
       pairs * discount_per_pair
     end
 
     def applicable?(items)
-      items.count { |item| item.code == @product_code } >= 2
+      matching_items(items).length >= 2
+    end
+
+    private
+
+    def matching_items(items)
+      items.select { |item| item.code == @product_code }
+    end
+
+    def count_pairs(items)
+      items.length / 2
+    end
+
+    def discount_per_pair
+      product = @catalog.find_by_code(@product_code)
+      product.price / 2.0
     end
   end
 end

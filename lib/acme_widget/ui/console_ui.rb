@@ -38,7 +38,7 @@ module AcmeWidget
         display_separator('-')
 
         products.each do |product|
-          display_message("#{product.code} - #{product.code.sub(/\d+/, '')} Widget: #{format_currency(product.price)}")
+          display_product_line(product)
         end
 
         display_separator('-')
@@ -48,25 +48,41 @@ module AcmeWidget
         display_formatted('=== BASKET SUMMARY ===')
 
         items_by_code.each do |code, items|
-          product = items.first
-          display_message("#{code} x#{items.size} - #{format_currency(product.price)} each")
+          display_basket_item(code, items)
         end
 
-        display_formatted('=== Price Breakdown ===')
-        display_message("Subtotal: #{format_currency(breakdown[:subtotal])}")
-
-        if breakdown[:discount].positive?
-          display_message("Discount:-#{format_currency(breakdown[:discount])}")
-          display_message("Subtotal after offers: #{format_currency(breakdown[:subtotal_after_offers])}")
-        end
-
-        display_message("Delivery charge: #{format_currency(breakdown[:delivery_charge])}")
-        display_message('-------------------')
-        display_message("TOTAL: #{format_currency(breakdown[:total])}")
-        display_message('====================')
+        display_price_breakdown(breakdown)
       end
 
       private
+
+      def display_product_line(product)
+        display_message("#{product.code} - #{product.code.sub(/\d+/, '')} Widget: #{format_currency(product.price)}")
+      end
+
+      def display_basket_item(code, items)
+        product = items.first
+        display_message("#{code} x#{items.size} - #{format_currency(product.price)} each")
+      end
+
+      def display_price_breakdown(breakdown)
+        display_formatted('=== Price Breakdown ===')
+        display_price_line('Subtotal', breakdown[:subtotal])
+
+        if breakdown[:discount].positive?
+          display_price_line('Discount', -breakdown[:discount])
+          display_price_line('Subtotal after offers', breakdown[:subtotal_after_offers])
+        end
+
+        display_price_line('Delivery charge', breakdown[:delivery_charge])
+        display_message('-------------------')
+        display_price_line('TOTAL', breakdown[:total])
+        display_message('====================')
+      end
+
+      def display_price_line(label, amount)
+        display_message("#{label}: #{format_currency(amount.abs)}")
+      end
 
       def format_currency(amount)
         "$#{format('%.2f', amount)}"

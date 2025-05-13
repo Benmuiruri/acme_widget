@@ -10,13 +10,17 @@ module AcmeWidget
     def calculate_discount(items)
       return 0 if items.empty?
 
-      @offers.sum do |offer|
-        offer.applicable?(items) ? offer.apply(items) : 0
-      end
+      @offers.sum { |offer| calculate_offer_discount(offer, items) }
     end
 
     def add_offer(offer)
       @offers << offer
+    end
+
+    private
+
+    def calculate_offer_discount(offer, items)
+      offer.applicable?(items) ? offer.apply(items) : 0
     end
   end
 end
